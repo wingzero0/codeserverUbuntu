@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   compiler:
-    image: wingzzz2003/codeserver_ubuntu:3.9.3
+    image: wingzzz2003/codeserver_ubuntu:3.12.0
     # image: wingzzz2003/codeserver_ubuntu:3.9.1
     volumes:
-      - ${PWD}/3.9.3/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
+      - ${PWD}/3.12.0/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
       # - ${PWD}/3.9.1/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
     ports:
       - 8080:8080

@@ -4,15 +4,15 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install vim curl git -y
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
-RUN curl -fsSL https://code-server.dev/install.sh | sh
+RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version 3.12.0
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=ASIA/MACAU
 RUN apt-get install tzdata -y
 RUN apt-get install openjdk-11-jdk -y
 WORKDIR /opt
-RUN curl https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -o maven.tgz
+RUN curl https://downloads.apache.org/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz -o maven.tgz
 RUN tar zxvf maven.tgz
-ENV PATH="/opt/apache-maven-3.6.3/bin:${PATH}"
+ENV PATH="/opt/apache-maven-3.8.3/bin:${PATH}"
 
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - 
 RUN apt-get install -y nodejs
