@@ -20,7 +20,7 @@ RUN npm install -g npm
 RUN apt-get install certbot -y
 
 RUN code-server --install-extension vscjava.vscode-java-pack
-RUN code-server --install-extension afmicc.getterandsettergenerator
+#RUN code-server --install-extension afmicc.getterandsettergenerator
 RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension octref.vetur
-RUN code-server --install-extension wmaurer.change-case
+#RUN code-server --install-extension wmaurer.change-case
