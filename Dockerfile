@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install vim curl git zip -y
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
-RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version 4.5.0
+RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=4.5.1
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=ASIA/MACAU
 RUN apt-get install tzdata -y
