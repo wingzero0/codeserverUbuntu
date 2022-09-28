@@ -1,10 +1,11 @@
 FROM ubuntu:20.04
 
 RUN apt-get update
-RUN apt-get upgrade -y
+#RUN apt-get upgrade -y
 RUN apt-get install vim curl git zip -y
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
-RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=4.5.1
+ARG codeserverversion=4.7.0
+RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=ASIA/MACAU
 RUN apt-get install tzdata -y
@@ -16,11 +17,13 @@ RUN update-alternatives --set jar /usr/lib/jvm/java-11-openjdk-amd64/bin/jar
 #/usr/lib/jvm/java-11-openjdk-amd64/bin/java
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 WORKDIR /opt
-RUN curl https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz -o maven.tgz
+ARG mavenversion=3.8.6
+ARG gradleversion=7.5.1
+RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz
-RUN curl -L "https://services.gradle.org/distributions/gradle-7.4.2-bin.zip" -o gradle.zip
+RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
 RUN unzip gradle.zip
-ENV PATH="/opt/apache-maven-3.8.6/bin:/opt/gradle-7.4.2/bin:${PATH}"
+ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${PATH}"
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - 
 RUN apt-get install -y nodejs
