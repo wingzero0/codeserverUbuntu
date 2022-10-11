@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   compiler:
-    image: wingzzz2003/codeserver_ubuntu:beta
+    image: wingzzz2003/codeserver_ubuntu:${codeserverversion}
     volumes:
-      - ${PWD}/4.5.1/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
-      - ${PWD}/4.5.1/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
+      - ${PWD}/${codeserverversion}/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
+      - ${PWD}/${codeserverversion}/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
     ports:
       - 8080:8080
     entrypoint: code-server
