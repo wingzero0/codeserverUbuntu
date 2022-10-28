@@ -35,3 +35,4 @@ RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension octref.vetur
 RUN code-server --install-extension vue.volar
 RUN code-server --install-extension redhat.fabric8-analytics
+RUN code-server --install-extension redhat.vscode-xml
