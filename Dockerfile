@@ -4,7 +4,7 @@ RUN apt-get update
 #RUN apt-get upgrade -y
 RUN apt-get install vim curl git zip -y
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
-ARG codeserverversion=4.7.1
+ARG codeserverversion=4.8.0
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=ASIA/MACAU
@@ -33,4 +33,5 @@ RUN apt-get install certbot -y
 RUN code-server --install-extension vscjava.vscode-java-pack
 RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension octref.vetur
+RUN code-server --install-extension vue.volar
 RUN code-server --install-extension redhat.fabric8-analytics
