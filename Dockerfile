@@ -4,7 +4,7 @@ RUN apt-get update
 #RUN apt-get upgrade -y
 RUN apt-get install vim curl git zip -y
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
-ARG codeserverversion=4.8.0
+ARG codeserverversion=4.8.2
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=ASIA/MACAU
