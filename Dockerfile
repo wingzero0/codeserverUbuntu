@@ -31,7 +31,11 @@ ARG codeserverversion=4.8.3
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
-RUN code-server --install-extension vscjava.vscode-java-pack
+RUN code-server --install-extension redhat.java \
+	&& code-server --install-extension vscjava.vscode-java-dependency \
+	&& code-server --install-extension vscjava.vscode-java-test \
+	&& code-server --install-extension vscjava.vscode-java-debug \
+	&& code-server --install-extension vscjava.vscode-maven
 RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension octref.vetur
 RUN code-server --install-extension vue.volar
