@@ -1,0 +1,5 @@
+FROM wingzzz2003/codeserver_ubuntu:4.9.1
+
+RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
+	&& update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac \
+	&& update-alternatives --set jar /usr/lib/jvm/java-17-openjdk-amd64/bin/jar

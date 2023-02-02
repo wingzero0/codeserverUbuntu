@@ -1,0 +1,15 @@
+services:
+  compiler:
+    image: wingzzz2003/codeserver_ubuntu:${codeserverversion}.java17
+    volumes:
+      - ./${codeserverversion}.java17/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
+      - ./${codeserverversion}.java17/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
+      - sourcecode:/root/sourcecode
+      - m2cache:/root/.m2
+    ports:
+      - 9000:9000
+    entrypoint: code-server
+
+volumes:
+  sourcecode:
+  m2cache:
