@@ -14,8 +14,8 @@ RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java \
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
 WORKDIR /opt
-ARG mavenversion=3.8.7
-ARG gradleversion=7.6
+ARG mavenversion=3.9.0
+ARG gradleversion=8.0
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
@@ -27,7 +27,7 @@ RUN apt-get install -y nodejs
 RUN npm install -g npm
 RUN apt-get install certbot -y
 
-ARG codeserverversion=4.9.1
+ARG codeserverversion=4.10.0
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
@@ -37,7 +37,6 @@ RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven
 RUN code-server --install-extension ms-vscode.sublime-keybindings
-RUN code-server --install-extension octref.vetur
 RUN code-server --install-extension vue.volar
 RUN code-server --install-extension redhat.fabric8-analytics
 RUN code-server --install-extension redhat.vscode-xml
