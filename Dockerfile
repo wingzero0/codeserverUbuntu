@@ -14,7 +14,7 @@ RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
 WORKDIR /opt
-ARG mavenversion=3.9.0
+ARG mavenversion=3.9.1
 ARG gradleversion=8.0.2
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz
@@ -27,7 +27,7 @@ RUN apt-get install -y nodejs
 RUN npm install -g npm
 RUN apt-get install certbot -y
 
-ARG codeserverversion=4.10.1
+ARG codeserverversion=4.11.0
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
