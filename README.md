@@ -7,13 +7,26 @@ Code Server是一個可以在Linux上經網頁介面提供VS Code的[Open Source
 
 
 ## 直接使用Pre-Build Image
-checkout repository, then
+checkout [git repository](https://github.com/wingzero0/codeserverUbuntu)
 ```
+# create / run container
 docker compose up -d
+# stop container
+docker compose stop
+# stop and delete container
+docker compose down
 ```
 
 ## Local Build Image
-checkout repository, then
+checkout [git repository](https://github.com/wingzero0/codeserverUbuntu)
 ```
+# create / run container
 docker compose -f docker-compose.local.yaml up -d
+# stop container
+docker compose -f docker-compose.local.yaml stop
+# stop and delete container
+docker compose -f docker-compose.local.yaml down
 ```
+
+## 使用Code Server
+在run container時，打開Browser localhost:8080，就可以開始使用code server
