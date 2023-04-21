@@ -1,0 +1,16 @@
+services:
+  compiler:
+    image: codeserver_ubuntu:${codeserverversion}
+    build: ./
+    volumes:
+      - ./${codeserverversion}/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
+      - ./${codeserverversion}/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
+      - sourcecode:/root/sourcecode
+      - m2cache:/root/.m2
+    ports:
+      - 8080:8080
+    entrypoint: code-server
+
+volumes:
+  sourcecode:
+  m2cache:
