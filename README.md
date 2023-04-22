@@ -29,4 +29,4 @@ docker compose -f docker-compose.local.yaml down
 ```
 
 ## 使用Code Server
-在run container時，打開Browser localhost:8080，就可以開始使用code server
+在run container時，打開Browser localhost:9000，就可以開始使用code server

@@ -1,12 +1,17 @@
 FROM ubuntu:22.04
 
-RUN apt-get update
-RUN apt-get install vim curl git zip -y
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get install tzdata -y
+RUN apt-get update && apt-get install -y \
+	vim \
+	curl \
+	git \
+	zip \
+	openjdk-17-jdk \
+	openjdk-11-jdk \
+	tzdata \
+	certbot \
+	&& rm -rf /var/lib/apt/lists/*
 RUN ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
-RUN apt-get install openjdk-11-jdk -y
-RUN apt-get install openjdk-17-jdk -y
 RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 	&& update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac \
 	&& update-alternatives --set jar /usr/lib/jvm/java-17-openjdk-amd64/bin/jar
@@ -17,17 +22,16 @@ WORKDIR /opt
 ARG mavenversion=3.9.1
 ARG gradleversion=8.0.2
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
-RUN tar zxvf maven.tgz
+RUN tar zxvf maven.tgz && rm maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
-RUN unzip gradle.zip
+RUN unzip gradle.zip && rm gradle.zip
 ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${PATH}"
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - 
-RUN apt-get install -y nodejs
+RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 RUN npm install -g npm
-RUN apt-get install certbot -y
 
-ARG codeserverversion=4.11.0
+ARG codeserverversion=4.12.0
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
@@ -40,3 +44,4 @@ RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension vue.volar
 RUN code-server --install-extension redhat.fabric8-analytics
 RUN code-server --install-extension redhat.vscode-xml
+RUN rm -rf /root/.cache/code-server

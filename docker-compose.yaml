@@ -7,7 +7,7 @@ services:
       - sourcecode:/root/sourcecode
       - m2cache:/root/.m2
     ports:
-      - 8080:8080
+      - 9000:9000
     entrypoint: code-server
 
 volumes:
