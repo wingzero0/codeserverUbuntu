@@ -7,10 +7,12 @@ services:
       - ./${codeserverversion}/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
       - sourcecode:/root/sourcecode
       - m2cache:/root/.m2
+      - extensions:/root/.local/share/code-server/extensions/
     ports:
       - 9000:9000
-    entrypoint: code-server
+    entrypoint: /root/entrypoint.sh
 
 volumes:
   sourcecode:
   m2cache:
+  extensions:

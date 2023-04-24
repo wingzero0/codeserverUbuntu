@@ -44,4 +44,8 @@ RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension vue.volar
 RUN code-server --install-extension redhat.fabric8-analytics
 RUN code-server --install-extension redhat.vscode-xml
+RUN code-server --install-extension mhutchie.git-graph
+
 RUN rm -rf /root/.cache/code-server
+RUN mv /root/.local/share/code-server/extensions/ /root/initExtensions/
+COPY entrypoint.sh /root/entrypoint.sh
