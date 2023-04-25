@@ -47,5 +47,5 @@ RUN code-server --install-extension redhat.vscode-xml
 RUN code-server --install-extension mhutchie.git-graph
 
 RUN rm -rf /root/.cache/code-server
-RUN mv /root/.local/share/code-server/extensions/ /root/initExtensions/
+RUN cd /root/.local/share/code-server/extensions/ && tar zcvf /root/extensions.tgz *
 COPY entrypoint.sh /root/entrypoint.sh
