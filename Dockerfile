@@ -39,8 +39,9 @@ RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-test \
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven
-RUN curl -L "https://github.com/microsoft/vscode-java-dependency/releases/download/0.23.0/vscjava.vscode-java-dependency-0.23.0.vsix" -o vscjava.vscode-java-dependency-0.23.0.vsix
-RUN code-server --install-extension vscjava.vscode-java-dependency-0.23.0.vsix && rm vscjava.vscode-java-dependency-0.23.0.vsix
+# RUN curl -L "https://github.com/microsoft/vscode-java-dependency/releases/download/0.23.0/vscjava.vscode-java-dependency-0.23.0.vsix" -o vscjava.vscode-java-dependency-0.23.0.vsix
+# RUN code-server --install-extension vscjava.vscode-java-dependency-0.23.0.vsix && rm vscjava.vscode-java-dependency-0.23.0.vsix
+RUN code-server --install-extension vscjava.vscode-java-dependency
 RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension vue.volar
 RUN code-server --install-extension redhat.fabric8-analytics
