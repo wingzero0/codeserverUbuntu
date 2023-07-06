@@ -31,7 +31,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 RUN npm install -g npm
 
-ARG codeserverversion=4.13.0
+ARG codeserverversion=4.14.1
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
@@ -39,8 +39,6 @@ RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-test \
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven
-# RUN curl -L "https://github.com/microsoft/vscode-java-dependency/releases/download/0.23.0/vscjava.vscode-java-dependency-0.23.0.vsix" -o vscjava.vscode-java-dependency-0.23.0.vsix
-# RUN code-server --install-extension vscjava.vscode-java-dependency-0.23.0.vsix && rm vscjava.vscode-java-dependency-0.23.0.vsix
 RUN code-server --install-extension vscjava.vscode-java-dependency
 RUN code-server --install-extension ms-vscode.sublime-keybindings
 RUN code-server --install-extension vue.volar
