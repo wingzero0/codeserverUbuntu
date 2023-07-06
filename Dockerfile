@@ -19,8 +19,8 @@ RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
 WORKDIR /opt
-ARG mavenversion=3.9.2
-ARG gradleversion=8.1.1
+ARG mavenversion=3.9.3
+ARG gradleversion=8.2
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz && rm maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
