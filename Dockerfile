@@ -20,8 +20,8 @@ RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
 WORKDIR /opt
-ARG mavenversion=3.9.4
-ARG gradleversion=8.3
+ARG mavenversion=3.9.5
+ARG gradleversion=8.4
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz && rm maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
@@ -35,7 +35,7 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 RUN npm install -g npm
 
-ARG codeserverversion=4.17.1
+ARG codeserverversion=4.18.0
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
@@ -50,6 +50,7 @@ RUN code-server --install-extension redhat.fabric8-analytics
 RUN code-server --install-extension redhat.vscode-xml
 RUN code-server --install-extension mhutchie.git-graph
 
+RUN mkdir /root/initExtensions/ && cd /root/.local/share/code-server/extensions/ && tar zcvf /root/initExtensions/extensions.tgz * 
+RUN rm -rf /root/.local/share/code-server/extensions/*/ && rm /root/.local/share/code-server/extensions/*
 RUN rm -rf /root/.cache/code-server
-RUN mkdir /root/initExtensions/ && cd /root/.local/share/code-server/extensions/ && tar zcvf /root/initExtensions/extensions.tgz *
 COPY entrypoint.sh /root/entrypoint.sh
