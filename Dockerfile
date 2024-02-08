@@ -21,7 +21,7 @@ RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 
 WORKDIR /opt
 ARG mavenversion=3.9.6
-ARG gradleversion=8.5
+ARG gradleversion=8.6
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz && rm maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
@@ -35,7 +35,7 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 RUN npm install -g npm
 
-ARG codeserverversion=4.20.1
+ARG codeserverversion=4.21.0
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
