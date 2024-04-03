@@ -29,7 +29,10 @@ RUN unzip gradle.zip && rm gradle.zip
 ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${PATH}"
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-RUN . /root/.nvm/nvm.sh && nvm install 18 && nvm install 20
+SHELL ["/bin/bash", "--login", "-i", "-c"]
+RUN source /root/.bashrc && nvm install 18 && nvm install 20
+#RUN nvm -v && node -v && npm -v
+SHELL ["/bin/sh", "-c"]
 
 ARG codeserverversion=4.22.1
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
