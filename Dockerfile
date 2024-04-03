@@ -28,12 +28,8 @@ RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin
 RUN unzip gradle.zip && rm gradle.zip
 ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${PATH}"
 
-RUN mkdir -p /etc/apt/keyrings && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key -o /tmp/nodesource-repo.gpg.key
-RUN gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg /tmp/nodesource-repo.gpg.key
-ENV NODE_MAJOR=18
-RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
-RUN npm install -g npm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+RUN . /root/.nvm/nvm.sh && nvm install 18 && nvm install 20
 
 ARG codeserverversion=4.22.1
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
