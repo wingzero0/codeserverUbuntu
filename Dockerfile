@@ -21,7 +21,7 @@ RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 
 WORKDIR /opt
 ARG mavenversion=3.9.6
-ARG gradleversion=8.6
+ARG gradleversion=8.7
 RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
 RUN tar zxvf maven.tgz && rm maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
@@ -34,7 +34,7 @@ RUN source /root/.bashrc && nvm install 18 && nvm install 20
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
-ARG codeserverversion=4.23.1
+ARG codeserverversion=4.89.1
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
