@@ -3,7 +3,7 @@ Code Server是一個可以在Linux上經網頁介面提供VS Code的[Open Source
 
 而這個Repo，主要是把Code Server包裝在Docker Image中，大家安裝了Docker就可以直接使用。
 
-目前Base Image為Ubuntu:22.04，預裝Java 17, Java 11, Maven, Gradle, Node 16.x
+目前Base Image為Ubuntu:24.04，預裝Java 17, Java 11, Maven, Gradle, Node 20.x, 18.x
 
 
 ## 直接使用Pre-Build Image
