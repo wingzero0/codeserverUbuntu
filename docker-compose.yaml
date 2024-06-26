@@ -2,8 +2,8 @@ services:
   compiler:
     image: wingzzz2003/codeserver_ubuntu:${codeserverversion}
     volumes:
-      - ./${codeserverversion}/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
-      - ./${codeserverversion}/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
+      - ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
+      - ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
       - sourcecode:/root/sourcecode
       - m2cache:/root/.m2
       - extensions:/root/.local/share/code-server/extensions/
