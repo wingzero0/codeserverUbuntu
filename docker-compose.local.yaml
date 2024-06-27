@@ -1,6 +1,7 @@
 services:
   compiler:
     image: codeserver_ubuntu:${codeserverversion}
+    restart: always
     build: ./
     volumes:
       - ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml

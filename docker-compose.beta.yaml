@@ -2,6 +2,7 @@ services:
   compiler:
     image: wingzzz2003/codeserver_ubuntu:beta
     pull_policy: always
+    restart: always
     volumes:
       - ./config-beta/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
       - ./config-beta/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
