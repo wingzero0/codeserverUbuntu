@@ -28,7 +28,7 @@ RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin
 RUN unzip gradle.zip && rm gradle.zip
 ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${PATH}"
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 SHELL ["/bin/bash", "--login", "-i", "-c"]
 RUN source /root/.bashrc && nvm install 18 && nvm install 20
 #RUN nvm -v && node -v && npm -v
