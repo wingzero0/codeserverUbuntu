@@ -34,7 +34,7 @@ RUN source /root/.bashrc && nvm install 18 && nvm install 20
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
-ARG codeserverversion=4.91.2
+ARG codeserverversion=4.92.2
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
