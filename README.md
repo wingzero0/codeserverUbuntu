@@ -45,3 +45,21 @@ killall5 -9
 ## 上/下載
 上載檔案：可以經過拖拉的方式，把桌面的檔案拖進 code-server 的 Explorer 區域。
 下載檔案：可以點選 code-server Explorer區域內的檔案，按滑鼠右鍵，選 Download 。
+
+#
+for podman 4.9.3 in steam deck
+dns not workings
+
+podman volume create codeserverubuntu_sourcecode
+podman volume create codeserverubuntu_m2cache
+podman volume create codeserverubuntu_extensions
+
+podman container run \
+    -v codeserverubuntu_sourcecode:/root/sourcecode \
+    -v codeserverubuntu_m2cache:/root/.m2 \
+    -v codeserverubuntu_extensions:/root/.local/share/code-server/extensions/ \
+    -v ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml \
+    -v ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json \
+    -p 9000:9000 \
+    --entrypoint /root/entrypoint.sh \
+    --rm docker.io/wingzzz2003/codeserver_ubuntu 
