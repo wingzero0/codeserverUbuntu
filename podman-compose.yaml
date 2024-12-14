@@ -1,12 +1,12 @@
 services:
   compiler:
     image: docker.io/wingzzz2003/codeserver_ubuntu:${codeserverversion}
-    pull_policy: always
     restart: always
     volumes:
       - ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
       - ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
-      - sourcecode:/root/sourcecode
+      - /tmp/sourcecode:/root/sourcecode
+      # - sourcecode:/root/sourcecode
       - m2cache:/root/.m2
       - extensions:/root/.local/share/code-server/extensions/
     network_mode: "host"
@@ -14,8 +14,20 @@ services:
     #   - 9000:9000
     # dns: 8.8.8.8
     entrypoint: /root/entrypoint.sh
+  db:
+    image: docker.io/postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in app container
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    network_mode: "host"
 
 volumes:
   sourcecode:
   m2cache:
   extensions:
+  postgres-data:
