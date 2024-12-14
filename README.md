@@ -46,10 +46,15 @@ killall5 -9
 上載檔案：可以經過拖拉的方式，把桌面的檔案拖進 code-server 的 Explorer 區域。
 下載檔案：可以點選 code-server Explorer區域內的檔案，按滑鼠右鍵，選 Download 。
 
-#
-for podman 4.9.3 in steam deck
-dns not workings
+# podman-compose in Steam OS 3.5 (3.6)
+For podman 4.9.3 in Steam OS, podman compose dns not workings. it will show below warning.
+```
+WARN[0002] aardvark-dns binary not found, container dns will not be enabled
+```
+even you add dns:8.8.8.8, it won't help.
 
+you might go back to `podman container run`.
+```bash
 podman volume create codeserverubuntu_sourcecode
 podman volume create codeserverubuntu_m2cache
 podman volume create codeserverubuntu_extensions
@@ -62,4 +67,10 @@ podman container run \
     -v ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json \
     -p 9000:9000 \
     --entrypoint /root/entrypoint.sh \
-    --rm docker.io/wingzzz2003/codeserver_ubuntu 
+    --rm docker.io/wingzzz2003/codeserver_ubuntu
+```
+
+or using `network_mode: 'host'` in `podman-compose.yaml`.
+```
+podman compose -f podman-compose.yaml up -d
+```

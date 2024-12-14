@@ -1,0 +1,21 @@
+services:
+  compiler:
+    image: docker.io/wingzzz2003/codeserver_ubuntu:${codeserverversion}
+    pull_policy: always
+    restart: always
+    volumes:
+      - ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
+      - ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
+      - sourcecode:/root/sourcecode
+      - m2cache:/root/.m2
+      - extensions:/root/.local/share/code-server/extensions/
+    network_mode: "host"
+    # ports:
+    #   - 9000:9000
+    # dns: 8.8.8.8
+    entrypoint: /root/entrypoint.sh
+
+volumes:
+  sourcecode:
+  m2cache:
+  extensions:
