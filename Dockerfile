@@ -2,9 +2,9 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG mavenversion=3.9.9
-ARG gradleversion=8.10.2
+ARG gradleversion=8.12
 ARG nvmversion=v0.40.1
-ARG codeserverversion=4.95.3
+ARG codeserverversion=4.96.2
 
 RUN apt-get update && apt-get install -y \
 	vim \
@@ -33,7 +33,7 @@ ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${P
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvmversion/install.sh | bash
 SHELL ["/bin/bash", "--login", "-i", "-c"]
-RUN source /root/.bashrc && nvm install 18 && nvm install 20
+RUN source /root/.bashrc && nvm install 20 && nvm install 18
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
