@@ -4,14 +4,14 @@ services:
     restart: always
     build: ./
     volumes:
-      - ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
-      - ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
-      - sourcecode:/root/sourcecode
-      - m2cache:/root/.m2
-      - extensions:/root/.local/share/code-server/extensions/
+      - ./config-latest/.config/code-server/config.yaml:/home/ubuntu/.config/code-server/config.yaml
+      - ./config-latest/.local/share/code-server/User/settings.json:/home/ubuntu/.local/share/code-server/User/settings.json
+      - sourcecode:/home/ubuntu/sourcecode
+      - m2cache:/home/ubuntu/.m2
+      - extensions:/home/ubuntu/.local/share/code-server/extensions/
     ports:
       - 9000:9000
-    entrypoint: /root/entrypoint.sh
+    entrypoint: /home/ubuntu/entrypoint.sh
 
 volumes:
   sourcecode:

@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
 	tzdata \
 	certbot \
 	gnupg \
+	sudo \
 	&& rm -rf /var/lib/apt/lists/*
 RUN ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
@@ -29,11 +30,15 @@ RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-m
 RUN tar zxvf maven.tgz && rm maven.tgz
 RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
 RUN unzip gradle.zip && rm gradle.zip
+
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | tee /etc/sudoers.d/ubuntu
+USER ubuntu
+WORKDIR /home/ubuntu
 ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${PATH}"
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvmversion/install.sh | bash
 SHELL ["/bin/bash", "--login", "-i", "-c"]
-RUN source /root/.bashrc && nvm install 20 && nvm install 18
+RUN source /home/ubuntu/.bashrc && nvm install 22 && nvm install 20
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
@@ -50,10 +55,12 @@ RUN code-server --install-extension redhat.java \
         && code-server --install-extension redhat.fabric8-analytics \
         && code-server --install-extension redhat.vscode-xml \
         && code-server --install-extension mhutchie.git-graph \
-        && mkdir /root/initExtensions/ \
-        && cd /root/.local/share/code-server/extensions/ \
-        && tar zcvf /root/initExtensions/extensions.tgz * \
-        && rm -rf /root/.local/share/code-server/extensions/*/ \
-        && rm /root/.local/share/code-server/extensions/* \
-        && rm -rf /root/.cache/code-server
-COPY entrypoint.sh /root/entrypoint.sh
+        && mkdir /home/ubuntu/initExtensions/ \
+        && cd /home/ubuntu/.local/share/code-server/extensions/ \
+        && tar zcvf /home/ubuntu/initExtensions/extensions.tgz * \
+        && rm -rf /home/ubuntu/.local/share/code-server/extensions/*/ \
+        && rm /home/ubuntu/.local/share/code-server/extensions/* \
+        && rm -rf /home/ubuntu/.cache/code-server
+COPY entrypoint.sh /home/ubuntu/entrypoint.sh
+# set defualt permission so that new mounted volume folder owner is ubuntu
+RUN mkdir /home/ubuntu/.m2
