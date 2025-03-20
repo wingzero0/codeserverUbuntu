@@ -2,9 +2,9 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG mavenversion=3.9.9
-ARG gradleversion=8.12.1
-ARG nvmversion=v0.40.1
-ARG codeserverversion=4.97.2
+ARG gradleversion=8.13
+ARG nvmversion=v0.40.2
+ARG codeserverversion=4.98.2
 
 RUN apt-get update && apt-get install -y \
 	vim \
@@ -49,18 +49,18 @@ RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-test \
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven \
-        && code-server --install-extension vscjava.vscode-java-dependency \
-        && code-server --install-extension ms-vscode.sublime-keybindings \
-        && code-server --install-extension vue.volar \
-        && code-server --install-extension redhat.fabric8-analytics \
-        && code-server --install-extension redhat.vscode-xml \
-        && code-server --install-extension mhutchie.git-graph \
-        && mkdir /home/ubuntu/initExtensions/ \
-        && cd /home/ubuntu/.local/share/code-server/extensions/ \
-        && tar zcvf /home/ubuntu/initExtensions/extensions.tgz * \
-        && rm -rf /home/ubuntu/.local/share/code-server/extensions/*/ \
-        && rm /home/ubuntu/.local/share/code-server/extensions/* \
-        && rm -rf /home/ubuntu/.cache/code-server
+	&& code-server --install-extension vscjava.vscode-java-dependency \
+	&& code-server --install-extension ms-vscode.sublime-keybindings \
+	&& code-server --install-extension vue.volar \
+	&& code-server --install-extension redhat.fabric8-analytics \
+	&& code-server --install-extension redhat.vscode-xml \
+	&& code-server --install-extension mhutchie.git-graph \
+	&& mkdir /home/ubuntu/initExtensions/ \
+	&& cd /home/ubuntu/.local/share/code-server/extensions/ \
+	&& tar zcvf /home/ubuntu/initExtensions/extensions.tgz * \
+	&& rm -rf /home/ubuntu/.local/share/code-server/extensions/*/ \
+	&& rm /home/ubuntu/.local/share/code-server/extensions/* \
+	&& rm -rf /home/ubuntu/.cache/code-server
 COPY entrypoint.sh /home/ubuntu/entrypoint.sh
 # set defualt permission so that new mounted volume folder owner is ubuntu
-RUN mkdir /home/ubuntu/.m2
+RUN mkdir /home/ubuntu/.m2 && mkdir /home/ubuntu/sourcecode
