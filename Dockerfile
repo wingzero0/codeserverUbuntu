@@ -14,8 +14,6 @@ RUN apt-get update && apt-get install -y \
 	openjdk-17-jdk \
 	openjdk-11-jdk \
 	tzdata \
-	certbot \
-	gnupg \
 	sudo \
 	&& rm -rf /var/lib/apt/lists/*
 RUN ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
@@ -26,10 +24,10 @@ RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
 WORKDIR /opt
-RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz
-RUN tar zxvf maven.tgz && rm maven.tgz
-RUN curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip
-RUN unzip gradle.zip && rm gradle.zip
+RUN curl "https://dlcdn.apache.org/maven/maven-3/$mavenversion/binaries/apache-maven-$mavenversion-bin.tar.gz" -o maven.tgz \
+	&& tar zxvf maven.tgz && rm maven.tgz \
+	&& curl -L "https://services.gradle.org/distributions/gradle-$gradleversion-bin.zip" -o gradle.zip \
+	&& unzip gradle.zip && rm gradle.zip
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | tee /etc/sudoers.d/ubuntu
 USER ubuntu
