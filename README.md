@@ -60,13 +60,13 @@ podman volume create codeserverubuntu_m2cache
 podman volume create codeserverubuntu_extensions
 
 podman container run \
-    -v codeserverubuntu_sourcecode:/root/sourcecode \
-    -v codeserverubuntu_m2cache:/root/.m2 \
-    -v codeserverubuntu_extensions:/root/.local/share/code-server/extensions/ \
-    -v ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml \
-    -v ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json \
+    -v codeserverubuntu_sourcecode:/home/ubuntu/sourcecode \
+    -v codeserverubuntu_m2cache:/home/ubuntu/.m2 \
+    -v codeserverubuntu_extensions:/home/ubuntu/.local/share/code-server/extensions/ \
+    -v ./config-latest/.config/code-server/config.yaml:/home/ubuntu/.config/code-server/config.yaml \
+    -v ./config-latest/.local/share/code-server/User/settings.json:/home/ubuntu/.local/share/code-server/User/settings.json \
     -p 9000:9000 \
-    --entrypoint /root/entrypoint.sh \
+    --entrypoint /home/ubuntu/entrypoint.sh \
     --rm docker.io/wingzzz2003/codeserver_ubuntu
 ```
 

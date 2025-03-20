@@ -3,17 +3,16 @@ services:
     image: docker.io/wingzzz2003/codeserver_ubuntu:${codeserverversion}
     restart: always
     volumes:
-      - ./config-latest/.config/code-server/config.yaml:/root/.config/code-server/config.yaml
-      - ./config-latest/.local/share/code-server/User/settings.json:/root/.local/share/code-server/User/settings.json
-      - /tmp/sourcecode:/root/sourcecode
-      # - sourcecode:/root/sourcecode
-      - m2cache:/root/.m2
-      - extensions:/root/.local/share/code-server/extensions/
+      - ./config-latest/.config/code-server/config.yaml:/home/ubuntu/.config/code-server/config.yaml
+      - ./config-latest/.local/share/code-server/User/settings.json:/home/ubuntu/.local/share/code-server/User/settings.json
+      - sourcecode:/home/ubuntu/sourcecode
+      - m2cache:/home/ubuntu/.m2
+      - extensions:/home/ubuntu/.local/share/code-server/extensions/
     network_mode: "host"
     # ports:
     #   - 9000:9000
     # dns: 8.8.8.8
-    entrypoint: /root/entrypoint.sh
+    entrypoint: /home/ubuntu/entrypoint.sh
   db:
     image: docker.io/postgres:latest
     restart: unless-stopped
