@@ -11,15 +11,16 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	git \
 	zip \
+	openjdk-8-jdk \
 	openjdk-17-jdk \
-	openjdk-11-jdk \
+	openjdk-21-jdk \
 	tzdata \
 	sudo \
 	&& rm -rf /var/lib/apt/lists/*
 RUN ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
-RUN update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java \
-	&& update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac \
-	&& update-alternatives --set jar /usr/lib/jvm/java-17-openjdk-amd64/bin/jar
+RUN update-alternatives --set java /usr/lib/jvm/java-21-openjdk-amd64/bin/java \
+	&& update-alternatives --set javac /usr/lib/jvm/java-21-openjdk-amd64/bin/javac \
+	&& update-alternatives --set jar /usr/lib/jvm/java-21-openjdk-amd64/bin/jar
 #/usr/lib/jvm/java-11-openjdk-amd64/bin/java
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
