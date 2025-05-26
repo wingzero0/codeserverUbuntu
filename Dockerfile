@@ -37,15 +37,14 @@ ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${P
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvmversion/install.sh | bash
 SHELL ["/bin/bash", "--login", "-i", "-c"]
+COPY script-vscode-java-test-workaround.sh script-vscode-java-test-workaround.sh
 RUN source /home/ubuntu/.bashrc && nvm install 22 && nvm install 20
-RUN bash script-vscode-java-test-workaround.sh && rm -rf vscode-java-test
+RUN ./script-vscode-java-test-workaround.sh && rm -rf vscode-java-test
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
-
-COPY script-vscode-java-test-workaround.sh script-vscode-java-test-workaround.sh
 
 RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-debug \
