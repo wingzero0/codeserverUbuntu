@@ -37,14 +37,25 @@ ENV PATH="/opt/apache-maven-$mavenversion/bin:/opt/gradle-$gradleversion/bin:${P
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvmversion/install.sh | bash
 SHELL ["/bin/bash", "--login", "-i", "-c"]
-COPY script-vscode-java-test-workaround.sh script-vscode-java-test-workaround.sh
 RUN source /home/ubuntu/.bashrc && nvm install 22 && nvm install 20
-RUN ./script-vscode-java-test-workaround.sh && rm -rf vscode-java-test
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
+
+SHELL ["/bin/bash", "--login", "-i", "-c"]
+RUN git clone https://github.com/microsoft/vscode-java-test.git \
+	&& cd vscode-java-test \
+	&& git checkout 0.43.1 \
+	&& npm install \
+	&& npm run build-plugin \
+	&& npx -y @vscode/vsce@latest package \
+	&& code-server --install-extension ./vscode-java-test-0.43.1.vsix  \
+	&& cd .. \
+	&& rm -rf vscode-java-test
+#RUN nvm -v && node -v && npm -v
+SHELL ["/bin/sh", "-c"]
 
 RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-debug \
