@@ -47,7 +47,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserv
 COPY script-vscode-java-test-workaround.sh script-vscode-java-test-workaround.sh
 
 RUN code-server --install-extension redhat.java \
-	&& bash script-vscode-java-test-workaround.sh && rm -rf vscode-java-test
+	&& bash script-vscode-java-test-workaround.sh && rm -rf vscode-java-test \
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven \
 	&& code-server --install-extension vscjava.vscode-java-dependency \
