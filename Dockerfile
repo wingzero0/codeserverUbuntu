@@ -2,9 +2,9 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG mavenversion=3.9.9
-ARG gradleversion=8.13
+ARG gradleversion=8.14.1
 ARG nvmversion=v0.40.2
-ARG codeserverversion=4.99.2
+ARG codeserverversion=4.100.2
 
 RUN apt-get update && apt-get install -y \
 	vim \
@@ -44,8 +44,10 @@ SHELL ["/bin/sh", "-c"]
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
+COPY script-vscode-java-test-workaround.sh script-vscode-java-test-workaround.sh
+
 RUN code-server --install-extension redhat.java \
-	&& code-server --install-extension vscjava.vscode-java-test \
+	&& bash script-vscode-java-test-workaround.sh && rm -rf vscode-java-test
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven \
 	&& code-server --install-extension vscjava.vscode-java-dependency \
