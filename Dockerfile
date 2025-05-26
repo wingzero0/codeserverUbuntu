@@ -53,7 +53,8 @@ RUN git clone https://github.com/microsoft/vscode-java-test.git \
 	&& npx -y @vscode/vsce@latest package \
 	&& code-server --install-extension ./vscode-java-test-0.43.1.vsix  \
 	&& cd .. \
-	&& rm -rf vscode-java-test
+	&& rm -rf vscode-java-test \
+	&& rm -rf /home/ubuntu/.m2 && rm -rf /home/ubuntu/.npm
 #RUN nvm -v && node -v && npm -v
 SHELL ["/bin/sh", "-c"]
 
