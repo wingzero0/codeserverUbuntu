@@ -1,10 +1,10 @@
 FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG mavenversion=3.9.9
-ARG gradleversion=8.14.1
-ARG nvmversion=v0.40.2
-ARG codeserverversion=4.100.2
+ARG mavenversion=3.9.10
+ARG gradleversion=8.14.2
+ARG nvmversion=v0.40.3
+ARG codeserverversion=4.100.3
 
 RUN apt-get update && apt-get install -y \
 	vim \
@@ -44,21 +44,8 @@ SHELL ["/bin/sh", "-c"]
 #curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserverversion
 
-SHELL ["/bin/bash", "--login", "-i", "-c"]
-RUN git clone https://github.com/microsoft/vscode-java-test.git \
-	&& cd vscode-java-test \
-	&& git checkout 0.43.1 \
-	&& npm install \
-	&& npm run build-plugin \
-	&& npx -y @vscode/vsce@latest package \
-	&& code-server --install-extension ./vscode-java-test-0.43.1.vsix  \
-	&& cd .. \
-	&& rm -rf vscode-java-test \
-	&& rm -rf /home/ubuntu/.m2 && rm -rf /home/ubuntu/.npm
-#RUN nvm -v && node -v && npm -v
-SHELL ["/bin/sh", "-c"]
-
 RUN code-server --install-extension redhat.java \
+	&& code-server --install-extension vscjava.vscode-java-test \
 	&& code-server --install-extension vscjava.vscode-java-debug \
 	&& code-server --install-extension vscjava.vscode-maven \
 	&& code-server --install-extension vscjava.vscode-java-dependency \
