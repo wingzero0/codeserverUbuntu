@@ -1,10 +1,10 @@
 FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG mavenversion=3.9.10
-ARG gradleversion=8.14.2
+ARG mavenversion=3.9.11
+ARG gradleversion=8.14.3
 ARG nvmversion=v0.40.3
-ARG codeserverversion=4.101.2
+ARG codeserverversion=4.102.2
 
 RUN apt-get update && apt-get install -y \
 	vim \
