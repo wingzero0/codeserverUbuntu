@@ -46,7 +46,8 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserv
 
 RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-test \
-	&& code-server --install-extension vscjava.vscode-java-debug \
+	#&& code-server --install-extension vscjava.vscode-java-debug \
+	&& code-server --install-extension vscjava.vscode-java-debug@0.58.2 \
 	&& code-server --install-extension vscjava.vscode-maven \
 	&& code-server --install-extension vscjava.vscode-java-dependency \
 	&& code-server --install-extension ms-vscode.sublime-keybindings \
