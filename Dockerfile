@@ -2,9 +2,9 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG mavenversion=3.9.11
-ARG gradleversion=9.2.0
+ARG gradleversion=9.2.1
 ARG nvmversion=v0.40.3
-ARG codeserverversion=4.105.1
+ARG codeserverversion=4.106.2
 
 RUN apt-get update && apt-get install -y \
 	vim \
@@ -21,7 +21,6 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime && dpkg-reconfigure -f 
 RUN update-alternatives --set java /usr/lib/jvm/java-21-openjdk-amd64/bin/java \
 	&& update-alternatives --set javac /usr/lib/jvm/java-21-openjdk-amd64/bin/javac \
 	&& update-alternatives --set jar /usr/lib/jvm/java-21-openjdk-amd64/bin/jar
-#/usr/lib/jvm/java-11-openjdk-amd64/bin/java
 #/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 
 WORKDIR /opt
