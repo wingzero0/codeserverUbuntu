@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG mavenversion=3.9.11
 ARG gradleversion=9.2.1
 ARG nvmversion=v0.40.3
-ARG codeserverversion=4.106.2
+ARG codeserverversion=4.107.0
 
 RUN apt-get update && apt-get install -y \
 	vim \
