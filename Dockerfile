@@ -45,8 +45,8 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserv
 
 RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-test \
-	#&& code-server --install-extension vscjava.vscode-java-debug \
-	&& code-server --install-extension vscjava.vscode-java-debug@0.58.2 \
+	&& code-server --install-extension vscjava.vscode-java-debug \
+	#&& code-server --install-extension vscjava.vscode-java-debug@0.58.2 \
 	&& code-server --install-extension vscjava.vscode-maven \
 	&& code-server --install-extension vscjava.vscode-java-dependency \
 	&& code-server --install-extension ms-vscode.sublime-keybindings \
@@ -57,9 +57,9 @@ RUN code-server --install-extension redhat.java \
 	&& mkdir /home/ubuntu/initExtensions/ \
 	&& cd /home/ubuntu/.local/share/code-server/extensions/ \
 	&& tar zcvf /home/ubuntu/initExtensions/extensions.tgz * \
-	&& rm -rf /home/ubuntu/.local/share/code-server/extensions/*/ \
-	&& rm /home/ubuntu/.local/share/code-server/extensions/* \
+	&& rm -rf /home/ubuntu/.local/share/code-server/extensions/ \
 	&& rm -rf /home/ubuntu/.cache/code-server
+
 COPY entrypoint.sh /home/ubuntu/entrypoint.sh
 # set defualt permission so that new mounted volume folder owner is ubuntu
-RUN mkdir /home/ubuntu/.m2 && mkdir /home/ubuntu/sourcecode
+RUN mkdir /home/ubuntu/.m2 && mkdir /home/ubuntu/sourcecode && mkdir /home/ubuntu/.local/share/code-server/extensions
