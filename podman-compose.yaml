@@ -2,31 +2,18 @@ services:
   compiler:
     image: docker.io/wingzzz2003/codeserver_ubuntu:${codeserverversion}
     restart: always
+    # group_add:
+    #   - keep-groups
     volumes:
-      - ./config-latest/.config/code-server/config.yaml:/home/ubuntu/.config/code-server/config.yaml
-      - ./config-latest/.local/share/code-server/User/settings.json:/home/ubuntu/.local/share/code-server/User/settings.json
+      # - ./config-latest/.config/code-server/config.yaml:/home/ubuntu/.config/code-server/config.yaml
+      # - ./config-latest/.local/share/code-server/User/settings.json:/home/ubuntu/.local/share/code-server/User/settings.json
       - sourcecode:/home/ubuntu/sourcecode
       - m2cache:/home/ubuntu/.m2
       - extensions:/home/ubuntu/.local/share/code-server/extensions/
     network_mode: "host"
-    # ports:
-    #   - 9000:9000
-    # dns: 8.8.8.8
     entrypoint: /home/ubuntu/entrypoint.sh
-  db:
-    image: docker.io/postgres:latest
-    restart: unless-stopped
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    environment:
-      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in app container
-      POSTGRES_PASSWORD: example
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-    network_mode: "host"
 
 volumes:
   sourcecode:
   m2cache:
   extensions:
-  postgres-data:
