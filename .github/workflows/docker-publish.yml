@@ -34,7 +34,9 @@ jobs:
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         run: |
           # we always tag branch builds with the SHA as well, see below
-          IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${GITHUB_SHA}
+          # use just the first 7 characters of the commit SHA for the pull/lookup
+          SHORT_SHA=${GITHUB_SHA::7}
+          IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${SHORT_SHA}
           if docker pull "$IMAGE"; then
             echo "exists=true" >> $GITHUB_OUTPUT
             # retag with the git tag and push
