@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG mavenversion=3.9.14
+ARG mavenversion=3.9.15
 ARG gradleversion=9.4.1
 ARG nvmversion=v0.40.4
 ARG codeserverversion=4.117.0
