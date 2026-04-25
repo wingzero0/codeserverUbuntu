@@ -4,14 +4,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG mavenversion=3.9.14
 ARG gradleversion=9.4.1
 ARG nvmversion=v0.40.4
-ARG codeserverversion=4.112.0
+ARG codeserverversion=4.117.0
 
 RUN apt-get update && apt-get install -y \
 	vim \
 	curl \
 	git \
 	zip \
-	openjdk-8-jdk \
 	openjdk-17-jdk \
 	openjdk-21-jdk \
 	tzdata \
@@ -46,7 +45,6 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=$codeserv
 RUN code-server --install-extension redhat.java \
 	&& code-server --install-extension vscjava.vscode-java-test \
 	&& code-server --install-extension vscjava.vscode-java-debug \
-	#&& code-server --install-extension vscjava.vscode-java-debug@0.58.2 \
 	&& code-server --install-extension vscjava.vscode-maven \
 	&& code-server --install-extension vscjava.vscode-java-dependency \
 	&& code-server --install-extension ms-vscode.sublime-keybindings \
