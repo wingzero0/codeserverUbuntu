@@ -11,12 +11,15 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	git \
 	zip \
+	locales \
 	openjdk-17-jdk \
 	openjdk-21-jdk \
 	tzdata \
 	sudo \
 	&& rm -rf /var/lib/apt/lists/*
-RUN ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 \
+    && ln -fs /usr/share/zoneinfo/Asia/Macau /etc/localtime \
+        && dpkg-reconfigure -f noninteractive tzdata
 RUN update-alternatives --set java /usr/lib/jvm/java-21-openjdk-amd64/bin/java \
 	&& update-alternatives --set javac /usr/lib/jvm/java-21-openjdk-amd64/bin/javac \
 	&& update-alternatives --set jar /usr/lib/jvm/java-21-openjdk-amd64/bin/jar
